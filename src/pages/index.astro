@@ -1,11 +1,19 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from '../components/Card.astro';
+
+const posts = await Astro.glob('../pages/posts/*.md'); 
 ---
 
 <Layout title="Blog">
 	<main>
-	<h1>Welcome</h1>
+	<h1>Welcome to the blog</h1>
+	<p></p>
+	{posts.slice(0,4).map(post => {
+		if (post.url) {
+			return <Card href={post.url} title={post.frontmatter.title} body={post.frontmatter.description} />
+		} 
+	})}
 	</main>
 </Layout>
 
